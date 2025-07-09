@@ -5,6 +5,10 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
 from groq import Groq
+from dotenv import load_dotenv
+load_dotenv()
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -15,7 +19,7 @@ model = tf.keras.models.load_model('model/densenet_model (1).keras')
 
 class_names = ['Peach___healthy', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Grape___healthy', 'Blueberry___healthy', 'Apple___healthy', 'Corn_(maize)___Northern_Leaf_Blight', 'Corn_(maize)___Common_rust_', 'Potato___Early_blight', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy', 'Strawberry___Leaf_scorch', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Grape___Black_rot', 'Apple___Apple_scab', 'Soybean___healthy', 'Pepper,_bell___Bacterial_spot', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Tomato___Late_blight', 'Strawberry___healthy', 'Potato___Late_blight', 'Raspberry___healthy', 'Cherry_(including_sour)___healthy', 'Tomato___Bacterial_spot', 'Grape___Esca_(Black_Measles)', 'Tomato___Early_blight', 'Orange___Haunglongbing_(Citrus_greening)', 'Corn_(maize)___healthy', 'Pepper,_bell___healthy', 'Tomato___Leaf_Mold', 'Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot', 'Tomato___Septoria_leaf_spot', 'Squash___Powdery_mildew', 'Peach___Bacterial_spot', 'Potato___healthy', 'Tomato___Target_Spot', 'Cherry_(including_sour)___Powdery_mildew']
 
-GROQ_API_KEY = "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" 
+
 groq_client = Groq(api_key=GROQ_API_KEY)
 
 def get_remedy_from_groq(disease_name):
